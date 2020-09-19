@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        
+        let request = new XMLHttpRequest()
+        request.open('GET', '/a/b/c?name=ff', true);  // 请求方式、URL、是否异步
+        request.onreadystatechange = function () {    // 当后端状态发生改变
+            if (request.readyState === 4 && request.status === 200) {
+                // 4表示发送给后端的请求已完成    200表示请求成功
+                console.log(request.responseText);
+            }
+        };
+        request.send();
+
+        
+            let request = new XMLHttpRequest()
+            request.open('get','xxxxxx/',true)
+            request.onreadystatechange = function() {
+                if (request.readyState === 4 && request.status === 200) {
+                    // 请求成功
+                    console.log(request.responseText);
+                }
+            }     
+            request.send()
+
+            let request = new XMLHttpRequest()
+            request.open('GET','XXXXXX/',true)
+            request.onreadystatechange = function() {
+                if (request.readyState === 4 && request.status === 200) {
+                    // 请求成功
+                    console.log(request.responseText);
+                }
+            }
+            request.send()
+
+
+
+
+    </script>
+</body>
+
+</html>

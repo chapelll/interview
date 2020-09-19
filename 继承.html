@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //原型链继承
+        function A(name) {
+            this.name = name
+        }
+        A.prototype.sayHi = function() {
+            console.log('hi');
+        }
+
+        function B(name) {
+            this.name = name
+        }
+        B.prototype = new A()
+
+        let b = new B('小b')
+
+        b.sayHi()
+        // 一个类A，在A的原型prototype上有一个函数，另外一个类B，想要继承A的prototype上的方法
+        // 我们就让类B的prototype 指向 A的一个实例，这样使用类B创建的实例就具有A的prototype上的方法了
+        // 类B创建的实例.__proto__ = 类B的prototype = 类A的实例 
+        // 类B的prototype.__proto__ = 类A的prototype
+
+        // 原型链继承就是让源B的prototype = 源A的实例，
+        // 这样源B的prototype就可以通过__proto__ 访问到源A的prototype了 
+
+
+        // 构造函数继承
+
+        function C() {
+            this.nameC = 'c'
+        }
+
+        function D() {
+            this.nameD = 'd'
+            C.call(this)
+        }
+        let ddd = new D()
+        console.log(ddd.nameC);
+
+        // 有一个类C和一个类D，类D想继承C的属性
+        // 类D直接调用一次类C，并且传入自己的this C.call(this)
+        // 只能继承属性，不能继承原型上的方法
+
+        // 组合继承: 同时使用原型链继承和构造函数继承
+
+        function E() {
+            this.nameE = 'E'
+        }
+        E.prototype.play = function run() {
+            console.log(run);
+        }
+
+
+        function F() {
+            this.nameF = 'F'
+            E.call(this)
+        }
+        F.prototype = new E()
+        // F通过prototype.__proto__ 指向了E的prototype，拥有了prototype上的方法
+        let fff = new F()
+        console.log(fff);
+
+    </script>
+</body>
+</html>

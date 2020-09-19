@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        //Object.defineProperty()方法会直接在一个对象上定义一个新属性，或者修改一个对象的现有属性，并返回此对象。
+        // Object.defineProperty(obj, prop, descriptor)
+
+        // obj 要定义属性的对象
+        // prop 要定义或修改的属性的名称
+        // descriptor 要定义或修改的属性描述符
+
+        let obj = {}
+
+        Object.defineProperty(obj, "a", {
+            value: 37,
+        });
+
+        console.log(obj);
+    </script>
+</body>
+
+</html>

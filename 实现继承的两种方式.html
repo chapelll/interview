@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 原型链继承
+        // function Animal(color) {
+        //     this.color = color
+        // }
+        // Animal.prototype.move = function () { } 
+        // // 动物可以动
+        // function Dog(color, name) {
+        //     Animal.call(this, color) 
+        //     // 或者 Animal.apply(this, arguments)
+        //     this.name = name
+        // }
+        // // 下面三行实现 Dog.prototype.__proto__ = Animal.prototype
+        // function temp() { }
+        // temp.prototype = Animal.prototype
+        // Dog.prototype = new temp()
+
+        // Dog.prototype.constuctor = Dog // 这行看不懂就算了，面试官也不问
+        // Dog.prototype.say = function () { console.log('汪') }
+
+        // var dog = new Dog('黄色', '阿黄')
+
+
+
+        function Animal(name) {
+            this.name = name
+        }
+        Animal.prototype.move = function () { console.log('移动'); } // 动物可以动
+
+
+        function Dog(name,color) {
+            Animal.apply(this, arguments)
+            this.color = color
+        }
+
+        //Dog.prototype = new Animal()
+
+        function temp() {}
+        temp.prototype = Animal.prototype
+        Dog.prototype = new temp() 
+
+
+        Dog.prototype.wang = function(){ console.log('汪')}
+        let dog = new Dog('小黄','yellow')
+        
+        console.log(dog.name);
+        console.log(dog.color);
+        dog.move();
+        dog.wang();
+        
+
+
+
+
+
+        //class继承
+
+        class Father {
+            constructor(name) {
+                this.name = name
+            }
+            sayHi() {
+                console.log('Hi');
+            }
+        }
+
+
+
+        class Son extends Father {
+            constructor(name, age) {
+                super(name)
+                this.age = age
+            }
+            play() {
+                console.log('玩游戏');
+            }
+        }
+
+        let xm = new Son('小明', 18)
+
+        console.log(xm);
+        xm.sayHi()
+        
+
+
+    </script>
+</body>
+
+</html>

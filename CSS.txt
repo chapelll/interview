@@ -1,0 +1,133 @@
+1.两种盒模型是什么，说一下？
+答: 盒模型可以看成一个装内容的盒子，从外到内是
+margin(外边距)、border(边框)、padding(内边距)、content(内容)
+有两种盒模型，分别是 标准盒模型 和 IE盒模型
+它们最大的差别是:
+标准盒模型 的 width 是指 content内容的宽度
+IE盒模型 的 width 是指 content + padding + border 的宽度
+ 
+使用box-sizing来切换盒模型: 
+box-sizing: content-box 标注盒模型
+box-sizing: border-box IE盒模型
+一般都使用 IE 盒模型，它用起来比较简便好用 
+
+2.如何实现垂直居中和水平居中?(考虑各种情况)
+答: (垂直居中和水平居中分开说)
+垂直居中: 
+(1) 绝对定位，父元素设置position: relative;
+              子元素设置position: absolute;
+              然后子元素top: 50%
+              再向上移动自己高度一半的距离:
+              margin-top: -50px (假设自己宽100px)
+              这里使用 transform(translateY: -50%)也可以
+(2) 绝对定位 + margin0 : 
+              父元素设置position: relative;
+              子元素设置position: absolute;
+              然后子元素top: 0;
+                        bottom: 0;
+                        left: 0;
+                        right: 0;
+                        margin: auto;
+              能够实现水平居中 + 垂直居中
+              
+(3) flex布局: 给父元素设置display: flex;
+              然后写 align-items: center(在侧轴上居中，
+              而默认主轴为X轴)
+水平居中: 
+(1) 内联元素，给父元素设置text-align:center;
+    块级元素，给子元素设置margin: 0 auto;
+(2) 如果想让一行中有两个块级元素水平居中，那么先给两个
+    块级元素设置display: inline-block(转为行内块); 
+    再给父元素设置text-align:center;
+(3) 绝对定位，父元素设置position: relative;
+              子元素设置position: absolute;
+              然后子元素left: 50%
+              再向左移动自己一半宽度的距离:
+              margin-left: -50px (假设自己宽100px)
+              这里使用 transform(translateX: -50%)也可以
+(4) flex布局: 给父元素设置display: flex;
+              然后写 justify-content: center(在主轴上居中，
+              而默认主轴为X轴)
+    
+3.flex 怎么用，常用属性有哪些？
+答: 设置弹性盒子 display: flex;
+父盒子属性:
+flex-direction（设置主轴方向）
+flex-direction: row | row-reverse | column | column-reverse;
+row为从左至右(默认) column为从上至下，reverse的意思是倒过来
+    
+flex-wrap（设置容器内的项目是否可换行）
+flex-wrap: nowrap | wrap | wrap-reverse;
+nowrap为不换行(默认) wrap为换行
+    
+justify-content（设置项目在主轴上的对齐方式）
+justify-content: flex-start | flex-end | center | space-between | space-around; 
+flex-start为主轴的起点 flex-end为主轴的终点 center为主轴中间
+space-between为在主轴上两端对齐(两个子元素就左 右， 三个子元素就左 中 右)
+space-around为在主轴上均匀分布(子元素中间的空隙都是均匀的)
+
+align-items（设置项目在侧轴上的对齐方式，仅在单行项目时生效）
+align-items: flex-start | flex-end | center | baseline | stretch;
+flex-start对齐侧轴起点 flex-end对齐侧轴终点 center在侧轴上居中
+
+align-content（设置项目在交叉轴上的对齐方式，仅在多行项目时生效）
+flex-start对齐侧轴起点 flex-end对齐侧轴终点 center在侧轴上居中
+    
+子项目属性:
+flex: 1;
+该项目尽量占完剩余空间
+(如果每个盒子都分配了flex: n，那么它就占总份数的n份)
+
+order：可以给一个或多个项目自定义在容器中的排列顺序，
+数值越小，排列越靠前，默认全部为 0，序号相同时按主轴
+方向排列。
+
+align-self：属性允许单个项目有与其他项目不一样的对齐方式，可覆盖align-items属性。
+默认值为auto，表示继承父元素的align-items属性，如果没有父元素，则使用默认值stretch。
+具体用法与容器属性align-items基本一致。
+
+3.BFC是什么？
+BFC全称块级格式化上下文,在一个div里使用 overflow: hidden,
+或者将它设置为flex弹性盒子: display: flex;
+可以制造BFC, 这个div里面的浮动元素就会被它包裹起来。
+通俗一点来讲，可以把 BFC 理解为一个封闭的大箱子，
+箱子内部的元素无论如何翻江倒海，都不会影响到外部。
+外边距合并: 同一个BFC中的两个盒子，一个下外边距为100px，
+另外一个上外边距为150px，那么它们之间的距离为150px
+(外边距会合并为较大的那一个)
+
+4.CSS 选择器优先级
+(1) 0 0 0 0 
+错误答案: 盒子类型(div，p)是第一位，
+          类选择器(.father)是第二位，
+          id选择器(#father)是第三位
+          行类样式(styel="")是第四位
+          important! 具有最高优先级
+
+(2) 越具体优先级越高，
+    当选择器相同，写在后面的覆盖前面的
+    important! 优先级最高，但少用
+
+5.清除浮动(背代码)
+答:
+.clearfix {
+            display: block;
+            content: '';
+            clear: both;
+        }
+把这个类名 clearfix 加到父元素上，
+里面的子元素的浮动就被清除了
+
+6.为什么清除浮动?
+答: 浮动造成的后果
+(1) 子元素浮动了，父元素就会塌缩
+(2) 一个元素浮动后面的元素会顶上来，使页面布局被改变 
+(3) 文本会围绕在浮动元素四周
+    
+    
+    
+    
+    
+    
+    
+    

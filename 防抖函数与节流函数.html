@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #box {
+            width: 1000px;
+            height: 500px;
+            background: #ccc;
+            font-size: 40px;
+            text-align: center;
+            line-height: 500px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="box"></div>
+    <button class="btn">0123</button>
+    <script>
+
+        const box = document.getElementById('box')
+        // box.onmousemove = function (e) {
+        //     box.innerHTML = `${e.clientX}, ${e.clientY}`
+        // }
+
+
+
+        // 1.防抖
+        // 一直触发我就不做,不触发等待一段时间后我就做了
+        let timeout
+        function debounce(func, delay) {
+            return function () {
+                window.clearTimeout(timeout)
+                timeout = setTimeout(() => {
+                    func.apply(this, arguments)
+                }, delay)
+            }
+        }
+
+
+        box.onmousemove = debounce(function (e) {
+            box.innerHTML = `${e.clientX}, ${e.clientY}`
+        }, 300)
+
+
+        // 2.节流
+        // 技能是有CD的,每次技能放完就把技能置为CD状态,要重新放时查看技能是否CD,
+        // 没CD就放,还在CD就什么都不做(return)
+        let cd = true
+        function throttle(func, delay) {
+            return function() {
+                if (!cd) {
+                    return
+                } else {
+                    func.apply(this, arguments)
+                    cd = false
+                    setTimeout(()=>{
+                        cd = true
+                    },delay)
+                }
+            }
+        }
+
+        let btn = document.querySelectorAll('.btn')[0]
+        console.log(btn);
+        // btn.addEventListener('click',function() {
+        //     console.log('点击了');
+        // })
+        btn.onclick = throttle(function() {
+            console.log(1);
+        } ,3000)
+
+    </script>
+</body>
+
+</html>

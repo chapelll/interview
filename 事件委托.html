@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        ul {
+            padding: 100px;
+            width: 600px;
+            height: 600px;
+            background: green;
+
+        }
+
+        li {
+            padding: 100px;
+            width: 400px;
+            height: 400px;
+            background: blue;
+        }
+
+        div {
+            width: 200px;
+            height: 200px;
+            background: red;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        button {}
+    </style>
+</head>
+
+<body>
+    <ul>
+        <li>
+            <div>
+                <button class="btn1">div1</button>
+                <button class="btn2">div2</button>
+            </div>
+        </li>
+    </ul>
+    <script>
+
+        let btn1 = document.querySelectorAll('.btn1')[0]
+        btn1.addEventListener('click', (e) => {
+            //console.log('div被点击了');
+            alert('btn1被点击了')
+        })
+
+
+
+        let ul = document.querySelectorAll('ul')[0]
+        // console.log(div);
+        ul.addEventListener('click', (e) => {
+            if(e.target.className.toLowerCase() === 'btn2') {
+                
+                alert('ul被点击了')
+            }
+            console.log(e.target.className);
+            // e.stopPropagation()
+            // console.log('ul被点击了');
+            
+        })
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>

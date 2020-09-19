@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function fn() {
+            return new Promise((resolve, reject) => {
+                // 进行状态
+                if (/*某种条件*/1) {
+                    resolve(数据)
+                    //执行resolve函数(成功状态)
+                } else {
+                    reject(报错)
+                    //执行reject函数(失败状态) 
+                }
+            })
+        }
+
+        fn().then((数据)=> {
+            // 这里写具体的成功函数(对应resolve)
+        },(报错)=> {
+            // 这里写具体的失败函数(对应reject)
+        })
+
+        Promise.all([promise1, promise2]).then(success, fail)
+        // 需要数组中的promise1和promise2全都成功才能调用success
+        // 其中有一个失败就调用fail
+
+        Promise.race([promise1, promise2]).then(success, fail)
+        // race是竞速的意思
+        // 数组中的promise1和promise2谁先变成完成状态(成功或者失败)就执行什么
+        // 谁第一个成功，就视为race的成功并调用success；谁第一个失败，就视为race的失败并调用fail
+
+
+
+
+
+
+
+
+        // let p = new Promise((resolve, reject) => {
+        //     // 做一些事情
+        //     // 然后在某些条件下resolve，或者reject
+        //     if (/* 条件随便写^_^ */) {
+        //         resolve()
+        //     } else {
+        //         reject()
+        //     }
+        // })
+
+        // p.then(() => {
+        //     // 如果p的状态被resolve了，就进入这里
+        // }, () => {
+        //     // 如果p的状态被reject
+        // })
+
+    </script>
+</body>
+
+</html>

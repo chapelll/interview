@@ -1,0 +1,183 @@
+8.async/await怎么用? 怎么捕获异常？
+ async/await 是 promise的语法糖，让promise更像
+ 一个同步函数的写法
+ 
+答: await必须放在async声明的函数里面
+async前缀的意思是这个函数是一个异步函数
+await就是等待一个异步操作的执行，异步执行完之后
+如果成功就使用resolve函数。
+使用try catch 来捕获异常和实现reject函数
+
+function fn() {
+            return new Promise((resolve, reject) => {
+                // 进行状态
+                if (/*某种条件*/1) {
+                    resolve(数据)
+                    //执行resolve函数(成功状态)
+                } else {
+                    reject(报错)
+                    //执行reject函数(失败状态) 
+                }
+            })
+        }
+
+async function test() {
+  try {
+   let n = await 摇色子()
+   // 成功执行resolve函数
+      } catch {
+   // 捕获错误或执行reject函数
+      }
+}
+
+
+9.如何实现深拷贝?
+
+答:首先说一下浅拷贝(普通数据类型没有深拷贝概念，
+因为普通数据类型是存放在栈里面的)
+引用数据类型存放在堆里面，它有一个地址，变量名指向
+的就是这个地址，浅拷贝就是让一个新的变量名也指向这
+个地址(其实它们指向的都是同一个对象)。
+
+深拷贝首先要创建一个判断是否是引用数据类型的函数，
+是就返回true不是就返回falese，然后再判断要拷贝
+的target是否是引用数据类型，不是的话就直接return，
+是的话就再判断它到底是对象还是数组，同时创建一个
+newTarget来准备接收它。如果target是数组newTarget
+也是数组；如果target是对象，newTarget也是对象
+然后遍历这个target的每个key，并针对每个target[key]
+判断它是否是引用数据类型，是的话就递归调用深拷贝
+函数，不是的话就直接将它赋给newTarget。最后返回这
+个newTarget。
+自己实现的深拷贝:
+        function deepClone(target) {
+            function isObject(obj) {
+                if (obj && typeof obj === 'object') {
+                    return true
+                } else {
+                    return false
+                }
+            } 
+
+            if (typeof target !== 'object') {
+                return
+            } else {
+                let newTarget = Array.isArray(target) ? [] : {}
+                for (let key in target) {
+                    newTarget[key] = isObject(target[key]) ? deepClone(target[key]) : target[key]
+                }
+                return newTarget
+            }
+        }
+
+10.如何用正则实现 trim()？
+
+答: trim()方法用来去除字符串的头尾空格。
+function trim(string) {
+    return string.replace(/^\s+|\s+$/g,'')
+    }
+
+/ ~~ /g 是js中正则表达式的声明，表示全局匹配
+
+^\s+ : 字符串开头的任意个空格
+|    : 或者
+\s+$ : 字符串末尾前的任意个空格
+,''  : 转换成没有内容的字符串
+
+11. 不用class实现继承？用class实现继承？
+
+答: 
+(1) 原型链继承
+        function Animal(name) {
+            this.name = name
+        }
+        Animal.prototype.move = function(){}
+
+        function Dog(name,color) {
+            Animal.apply(this, arguments)
+            // 重点1:调用父构造函数，强行让Animal的this指向
+            // 当前的this，当前的this就是Dog的this
+            this.color = color
+        }
+
+        function temp() {}
+        temp.prototype = Animal.prototype
+        Dog.prototype  = new temp()
+        // 重点2 让子构造函数的prototype.__proto__ =
+                   父构造函数的prototype
+                   
+(2) class继承
+        class Father{
+            constructor (name) {
+                this.name = name
+            }
+            sayHi() {
+                console.log('Hi');
+            }
+        }
+
+        class Son extends Father {
+            constructor (name,age) {
+                super(name) // super是重点
+                this.age = age
+            }
+            play() {
+                console.log('玩游戏');
+            }
+        }
+
+12. 如何实现数组去重?
+(1) hash(计算排序的变形)
+        function fn(array) {
+            let hash = {}
+            let newArray = []
+            for (let i = 0; i < array.length ; i++) {
+                if (array[i] in hash) {
+                    hash[array[i]] = hash[array[i]] + 1
+                } else {
+                    hash[array[i]] = 1
+                }
+            }
+            for (let k in hash) {
+                newArray.push(parseFloat(k))
+            }
+            return newArray
+        }
+        let array = [1,2,2,3,4,5,5,6,6,6,7]
+        console.log(fn(array)); 
+解析: 创建一个新的hash表(是一个对象)，for循环遍历数组
+array，如果hash表中没有array[i]项，就新创建一项，将
+array[i]作为这项的key值，value设置为1。如果有array[i]项
+，就使这一项的value值加一(hash[array[i]] = hash[array[i]] + 1)
+当hash表完成后，再新创建一个数组newArray，数组newArray的值
+就是hash表的各个key
+
+(2) set方法
+let arr1 = [1,1,2,3,3,4,5,5]
+let arr = new Set(arr1)
+console.log(arr)
+
+13. new 的背后做了什么？
+
+答:
+(1)创建一个空对象 let obj = {}
+(2)让构造函数的prototype指向空对象的__proto__   obj.__proto__ = Object.prototype;
+(3)把this绑定到新对象上去 Object.apply(obj, arguments) 
+   // 将Object的this放到新对象上去
+(4)返回新对象
+
+function newFunc (name) {
+    var o = {};
+    o.__proto__ = Person.prototype;//绑定Person的原型
+    Person.call(o, name);
+    return o;
+}
+
+
+
+
+
+
+
+
+

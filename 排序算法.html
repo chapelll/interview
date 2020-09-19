@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let arr = [2, 7, 1, 5, 3, 9, 6, 4, 8, 4, 8, 6, 7]
+
+
+        // 冒泡排序
+        function maopao(arr) {
+            for (let i = 0; i < arr.length; i++) {
+                for (let j = 0; j < arr.length - i - 1; j++) {
+                    if (arr[j] > arr[j + 1]) {
+                        let temp = 0
+                        temp = arr[j]
+                        arr[j] = arr[j + 1]
+                        arr[j + 1] = temp
+                    }
+                }
+            }
+            return arr
+        }
+
+        // 计数排序
+        function jishu(arr) {
+
+            // 找到最大值
+            let max = 0
+            for (let i = 0; i < arr.length; i++) {
+                if (max < arr[i]) {
+                    max = arr[i]
+                }
+            }
+            console.log(max);
+
+            // 完成hash表
+            let obj = {}
+            for (let key in arr) {
+                if (!obj[arr[key]]) {
+                    obj[arr[key]] = 1
+                } else {
+                    obj[arr[key]] += 1
+                }
+            }
+
+            // 生成新数组
+            let newArr = []
+            for (let i = 0; i <= max; i++) {
+                if (obj[i]) {
+                    for (let j = 0; j < obj[i]; j++) {
+                        newArr.push(i)
+                    }
+                }
+            }
+
+            return newArr
+        }
+
+        // 快速排序 
+        // function kuaipai(arr) {
+        //     if (arr.length <= 1) { return arr }
+        //     let index = parseFloat((arr.length) / 2)
+        //     let pivot = arr.splice(index, 1)[0]
+        //     let left = []
+        //     let right = []
+        //     for (let i = 0; i < arr.length; i++) {
+        //         if(arr[i]<pivot) {
+        //             left.push(arr[i])
+        //         } else {
+        //             right.push(arr[i])
+        //         }
+        //     }
+        //     return kuaipai(left).concat([pivot],kuaipai(right))
+        // }
+
+
+
+        function kuaipai(arr) {
+            if (arr.length <= 1) { return arr }
+            let index = Math.floor(arr.length / 2)
+            let pivot = arr.splice(index, 1)[0]
+            let left = []
+            let right = []
+            for (let i = 0; i < arr.length; i++) {
+                if (arr[i] < pivot) {
+                    left.push(arr[i])
+                } else {
+                    right.push(arr[i])
+                }
+            }
+            return kuaipai(left).concat(pivot,kuaipai(right))
+        }
+
+
+
+
+        console.log(kuaipai(arr));
+
+    </script>
+</body>
+
+</html>

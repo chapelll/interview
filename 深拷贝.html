@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        // JSON.parse(JSON.stringify(obj))
+
+
+        // function clone1(target) {
+        //     if (typeof target === 'object') {
+        //         let cloneTarget = {};
+        //         for (const key in target) {
+        //             cloneTarget[key] = clone(target[key]);
+        //         }
+        //         return cloneTarget;
+        //     } else {
+        //         return target;
+        //     }
+        // }
+
+        // function clone(target) {
+        //     if (typeof target === 'object') {
+        //         let cloneTarget = Array.isArray(target) ? [] : {};
+        //         for (let key in target) {
+        //             cloneTarget[key] = clone(target[key]);
+        //         }
+        //         return cloneTarget;
+        //     } else {
+        //         return target;
+        //     }
+        // };
+
+
+        // function deepClone(target) {
+        //     function isObject(obj) {
+        //         if (obj && typeof obj === 'object') {
+        //             return true
+        //         } else { 
+        //             return false
+        //         }
+        //     } 
+
+        //     if (typeof target !== 'object') {
+        //         return
+        //     } else {
+        //         let newTarget = Array.isArray(target) ? [] : {}
+        //         for (let key in target) {
+        //             newTarget[key] = isObject(target[key]) ? deepClone(target[key]) : target[key]
+        //         }
+        //         return newTarget
+        //     }
+        // }
+
+
+
+
+
+        function deepClone(target) {
+
+            function isObject(obj) {
+                if (typeof obj === 'object') {
+                    return true
+                } else {
+                    return false
+                }
+            }
+
+            if (typeof target !== 'object') {
+                return
+            }
+
+            let newTarget = Array.isArray(target) ? [] : {}
+            for (let key in target) {
+                newTarget[key] = isObject(target[key]) ? deepClone(target[key]) : target[key]
+            }
+            return newTarget
+        }
+
+
+
+
+
+
+
+
+        let a = {
+            obj1: 11,
+            obj2: 22,
+            obj3() {
+                console.log(33);
+            }
+        }
+        let b = deepClone(a)
+        console.log(a);
+        console.log(b);
+        console.log(a === b);
+    </script>
+</body>
+
+</html>

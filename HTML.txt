@@ -1,0 +1,62 @@
+1.如何理解HTML语义化?
+
+答: HTML语义化就是写HTML时不只使用 div 标签 ，而使用正确的标签，
+比如段落就写 p 标签，标题就写 h1 标签，文章就写article标签，导航栏写nav，
+底部写 footer 等等。
+
+2.meta viewport 是做什么用的，怎么写?
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0,
+maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+
+答: meta中的viewport(视口)是用来决定页面在移动端是否正常显示的。
+
+写法: 首先是meta，里面写上name = viewport，然后里面的content是
+width = device-width (也就是宽度等于设备的分辨率)；
+initial-scale=1.0 (页面的初始缩放比例，1.0指不给移动设备的
+浏览器进行缩放，和width = device-width效果相同)；
+maximum-scale=1.0 (页面最大能够缩放的比例)
+minimum-scale=1.0 (页面最小能够缩放的比例)
+user-scalable=no (是否允许用户进行缩放，no表示不允许)
+
+3.你用过哪些 HTML5 标签?
+
+答: 
+内容相关: header头部 footer脚步 article文章 nav导航栏
+功能相关: cavas画板 video视频 audio音频 
+
+cavas : const canvas = document.getElementById('canvas');
+        // 从document获取canvas元素
+        const ctx = canvas.getContext('2d');
+        // 声明一个变量接收它 二维
+        ctx.fillStyle = 'green';
+        // fillStyle让它变绿色
+        ctx.fillRect(10, 10, 150, 100);
+        // fillRect() 方法将它的左上角放在(10, 10)，
+        把它的大小设置成宽150高100。
+        
+video : <video src='vid.ogg' autoplay poster="1.jpg" controls>
+        // video用来在网页中放入一个视频
+        // src是视频的地址
+        // autoplay是自动播放
+        // poster是它的封面
+        // controls是向用户显示播放按钮之类的控件
+audio : <audio src="someaudio.wav" autoplay loop controls>
+        // audio用来在网页中放入一个音频
+        // src是音频的地址
+        // autoplay是自动播放
+        // loop是结束时创新播放
+        // controls是向用户显示播放按钮之类的控件
+
+4.H5 是什么？
+答: H5是移动端页面的意思，用前端技术做出的一种页面
+
+
+
+
+
+
+
+
+
+

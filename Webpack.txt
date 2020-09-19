@@ -1,0 +1,76 @@
+Typescript
+(1) never类型是什么?
+答: 是一种不应该出现的类型，代码不会运行到
+
+(2) Typescript比起JavaScript有什么优势?
+答: TS是JS的超集，TS具有JS的功能而且还多了类型检查，让你在
+编译时就能发现错误而不是要运行当前代码才能发现出错了。
+
+Webpack
+1.有哪些常见 loader 和 plugin，你用过哪些？
+答:          
+
+scss的loader less的loader stylus的loader
+babel-loader (将js转换成ES5版本兼容低端浏览器)
+eslint-loader(检查js是否有语法错误)
+图片有svg的loader
+
+html有webpack的plugin(打包时生成html文件)
+
+
+
+
+2. loader 和 plugin 的区别是什么？
+
+答:
+loader是加载器(没有就加载不了)，plugin是插件(添加一些附加功能)
+
+
+
+
+3. webpack如何按需加载代码?
+
+答:
+import('文件路径')
+
+
+
+
+4. 如何提高webpack的构建速度?
+
+答:
+Happypack 实现多线程加速编译 ; DllPlugin 进行预编译
+
+
+
+5. webpcak转义出的文件过大怎么办?
+
+答:
+在开发时多进行封装和模块化，减少文件体积
+对js、css、图片进行压缩
+删除不必要的注释
+
+安全
+1.什么是 XSS？如何预防？
+
+答:  Cross-Site Scripting 跨站点脚本
+恶意用户在提交评论时提交一个<script>标签，里面写一些恶意
+的操作(比如打印出cookie)。正常用户的浏览器读取到这个js标签
+可能就会去执行，造成信息的泄露。
+如何防范: 对提交的评论进行过滤，比如将"JavaScript"这个关键字
+转换成其他的字符。
+
+2.什么是 CSRF？如何预防？
+
+答:CSRF(Cross Site Request Forgery)即跨站请求伪造
+利用用户已经登录的身份在用户不知情的情况下进行危险的操作。
+用户在登录银行后会留下cookie，然后用户登录危险网站，危险
+网站上有一张img，img的src是一个危险的请求: 转账1000块至某
+账户。当浏览器加载这张图片时就会执行这个请求，而又因为用户
+留下了银行的cookie，银行会误以为是本人在进行操作。
+如何防范: 敏感操作使用post请求、敏感操作使用验证码、token
+
+
+
+
+

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 数组
+        let arr = [1,2,3,4,5]
+        arr.push(6)
+        console.log(arr);
+
+        arr.pop()
+        console.log(arr);
+
+        arr.shift() // 删除第一个
+        console.log(arr);
+
+        arr.unshift(0) // 在首部添加元素
+        console.log(arr);
+
+        console.log(arr.toString()); // 转换成字符串
+
+        //字符串
+        let str = '你好这个世界'
+        let string = 'aabbCCDD'
+
+        console.log(str.slice(0,1));  //截取，从0开始，不包括1
+
+        console.log(str.indexOf('个')); // 查找某个字符，有就返回下标
+        
+        console.log(string.toLowerCase()); // 转换成小写
+
+        console.log(string.toUpperCase()); // 转换成大写
+
+        console.log(str.length); // 查询长度
+
+        //对象
+        let obj = {
+            a: 'A',
+            b: 'B',
+            c: 'C'
+        }
+        console.log(Object.keys(obj)); // 返回一个由对象的key值组成的数组
+    </script>
+</body>
+</html>

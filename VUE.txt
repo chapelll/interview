@@ -1,0 +1,157 @@
+1. watch 和 computed 和 methods 区别是什么？
+
+答:
+(1)watch是监听数据，当某个数据改变了就执行相应的操作(函数)。
+(2)computed是计算属性，与watch不同的是它就是计算出一个属性，
+当它依赖的值改变就会重新计算且computed是有缓存的。
+
+2. Vue 有哪些生命周期钩子函数？分别有什么用？
+答:
+
+beforeCreate(在组件创建之前做一些事情)
+     ↓
+   created  (做创建后的初始化)
+     ↓
+beforeMount
+     ↓
+   mouted   (在挂载阶段请求数据)
+     ↓
+     ↓→→→→→→→→ beforeUpdate
+     ↓               ↓
+     ↓←←←←←←←←←   updated  (更新后做一些事情)
+     ↓
+beforeDestroy
+     ↓
+  destoryed
+  
+3.Vue 如何实现组件间通信？
+答:
+(1)父子组件通信
+父向子:
+父组件可以直接向子组件传递数据，子组件使用props来接收
+子向父:
+子组件通过$emit触发一个事件，将数据放在$emit的第二个参数
+上，父组件使用v-on监听该事件并写一个回调函数，回调函数中
+的参数就是子组件想向父组件传递的值
+(2)发布订阅模式(总线EventBus)
+首先需要在全局(main.js)定义一个总线: 
+Vue.prototype.$EventBus = new Vue()   
+组件A使用eventBus触发一个事件并将数据写入 
+this.$EventBus.$emit('fn',this.data-A)
+组件B监听这个函数,$on()中的第二个值就是传递的数据
+this.eventBus.$on('fn',(data-A)=》{console.log(data-A)})
+(3)使用Vuex
+Vuex的专为vue开发的状态管理工具。
+
+State: 将一个vue应用程序的所有数据都集中存放在vuex中的
+state上(就像一个普通vue组件的data)，其他任何组件想要用
+到数据都可以使用this.$store.state来得到
+
+Getter: getter中可以定义一些属性，这些属性都依赖于state
+中的属性，当依赖的state的属性变化时，getter中的该属性也
+会同步变化(getter就像vuex中的计算属性一样)，其他任何组件
+都可以通过this.$store.getters来得到
+
+Mutation: 想要改变vuex中的state中的值只能通过mutation中的
+方法来改变，其他组件可以通过store.commit('')提交一个
+mutation来改变state中的值，store.commit还可以传入一个
+额外的参数，即mutation的负载payload。
+Mutation必须是一个同步函数
+
+Action: 类似于mutation，但action是用来提交mutation的
+，action支持异步的操作。action使用store.dispatch来提交
+mutation
+
+Module: module可以把一个vuex分成几小块，每一小块有自己
+的state、getter、mutation这样
+
+4.Vue 数据响应式怎么做到的？(Vue如何实现双向绑定？原理？)
+
+答:
+v-model是经典的双向绑定的例子。
+给v-model绑定一个data中的值，当该值改变时v-model中的内容也会
+改变；当v-model中的内容变化时，data中的该值也会变化
+自己动手实现v-model:
+在模板内写一个输入框(input)，在data内写一个value值，把
+data中的value值绑定到input框的value上去。这就实现了修改
+data中的value模板内的input内容会随之变化的功能。
+然后在模板输入时定义一个事件 @input="changeValue",
+在methods写这个事件，参数是e(输入事件)，拿到e.target.value
+，将它赋给data中的value。
+完毕，手动实现了v-model
+
+原理:
+使用Object.defineProperty()劫持各个属性的getter，setter。
+当读取该属性时就会执行get函数，修改该属性时就会执行set函数。
+再结合发布订阅者模式，监听这些函数并执行相应回调
+注意: 受到defineProperty的限制，Vue无法检测到定义在data之外的
+对象属性的添加或删除，此时可以使用Vue.set方法来为对象添加或修改
+属性。
+
+5.Vue.set 是做什么用的？
+
+答:
+Vue 不能检测到定义在data之外的对象属性的添加或删除，解决方法是
+手动调用 Vue.set 或者 this.$set。
+
+6.VueRouter 你怎么用的？
+答:
+Vue Router 是 Vue.js 官方的路由管理器。使用它可以方便地构建
+单页面应用(根据URL地不同展示不同的组件)
+
+动态路由: 在路由配置时可以使用:id来占位。当进入到该路由所对应
+的组件时，可以使用this.$route.params来得到参数。
+
+两种模式: 普通情况下是hash模式，还有一种模式是history模式
+          hash模式下的url中有 # ，history模式下则没有
+          (history模式下请求服务器会发送一整条不带#的完整
+          url，可能会出现报错)
+
+路由守卫: router.beforeEach((to, from, next) => {
+          // ...
+          })
+          在vueRouter中使用beforeEach来创建一个路由守卫
+          它有三个参数: to  from  next
+          to →→→ 要前往的路由
+          from →→→ 要离开的路由
+          next →→→ 可以在next中写上某些操作，比如跳转到
+                   什么什么地方。next在每个逻辑下都一定要调用一次
+                   
+          if (!isLogin) {
+            //如果从vuex中查询到没有登录
+          next({
+            path: '/login',
+            query: { redirect: to.fullPath }
+            // query存储本来要跳转到的页面，方便登录后重定向
+            })
+          } else {
+            next()
+            }
+
+路由懒加载: 如果是比较大的单页面SPA应用，文件会比较大，第一次进
+            入到首页时会加载较长的时间。使用懒加载可以让一些页面
+            在需要的时候才进行加载，分担首页加载的压力。
+            
+            不用在vueRouter文件的最上方全部引入组件，而是在每个
+            路由对应的组件那里写一个回调来进行引入
+            component: () => import('@/pages/Login.vue')
+            或者
+            const List = () => import('@/components/list.vue')
+            const router = new VueRouter({
+                routes: [
+                  { path: '/list', component: List }
+                        ]
+            })
+            总而言之，就是使用回调的形式去进行组件的引入。
+
+Vue-Router常用API:
+
+(1) router-link: 写在模板内，类似于a标签，点击就可跳转至对应组件
+(2) router-view: 一般写在App.vue上，它里面的内容会使用vue-router
+                 进行渲染。
+(3) this.$router.push: 跳转一个路由，会留下历史记录
+(4) this.$router.replace: 替换一个路由，不会留下历史记录             
+(5) this.$route.params: 获取当前路由的信息，一般与:动态路由设置
+                        相搭配使用            
+
+this.$router 指整个路由器 ； this.$route 指当前路由信息
