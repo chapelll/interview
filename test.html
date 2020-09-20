@@ -1,26 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
     <script>
-        class Animal {
-           constructor(name) {
-               this.name = name
-           }
-           run() {
-               console.log('跑动');
-           }
+        function kuaipai(array) {
+            if (array.length <= 1) {
+                return array
+            }
+            let index = Math.floor(array.length / 2)
+            let n = array.splice(index, 1)
+            console.log(n);
+            let left = []
+            let right = []
+            for (let i = 0; i < array.length; i++) {
+                if (array[i] < n) {
+                    left.push(array[i])
+                } else {
+                    right.push(array[i])
+                }
+            }
+            return kuaipai(left).concat(n,kuaipai(right))
         }
-
-        let dog = new Animal('狗')
-        
-        console.log(dog.__proto__.__proto__.__proto__);
-        
+        let array = [1,4,6,3,7,1,6,9,4,8,9,1]
+        console.log(kuaipai(array));
 
     </script>
 </body>
+
 </html>

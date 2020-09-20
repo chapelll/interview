@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <canvas id="myCanvas" height="300px" width="300px"></canvas>
+
+    <script>
+        let canvas = document.getElementById('myCanvas')
+        let ctx = canvas.getContext('2d')
+        ctx.fillStyle = "rgb(200,0,0)"; 
+        ctx.fillRect (10, 10, 55, 50);
+
+        // 1.首先在body声明一块canvas画板，然后给它加上高度和宽度。
+        // 2.在js里声明一个变量来接收这块画板
+        // 3.再声明一个变量来获得这块画板的渲染上下文(画笔)
+        // 4.作画，fillStyle表示填充的颜色，fillRect表示作画的位置(前面两个是x和y表示矩形左上角的坐标，后面两个是画出矩形的宽高)
+    </script>
+</body>
+
+</html>
