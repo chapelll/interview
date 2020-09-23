@@ -14,46 +14,37 @@
         let btn1 = document.querySelectorAll('button')[0]
         let btn2 = document.querySelectorAll('button')[1]
 
-        //节流
-        function jieliu(fun, delay) {
+        function jieliu(fn,delay) {
             let cd = true
             return function () {
                 if (!cd) {
                     return
+                } else {
+                    fn.apply(this, arguments)
+                    // 这里的this指向的是return function的this，其主要作用是传参arguments
+                    cd = false
+                    setTimeout(()=>{
+                        cd = true
+                    },delay)
                 }
-                fun.apply(this, arguments)
-                cd = false
-                setTimeout(() => {
-                    cd = true
-                }, delay)
             }
         }
-
         btn1.onclick = jieliu(function () {
             console.log('节流');
         }, 1000)
 
-
-
-        function fangdou(fun, delay) {
-            let timeout = 0 // 定时器名字
-            return function () {
+        function fangdou(fn,delay) {
+            let timeout = null
+            return function() {
                 window.clearTimeout(timeout)
-                timeout = setTimeout(() => {
-                    fun()
-                }, delay)
+                timeout = setTimeout(()=>{
+                    fn.apply(this, arguments)
+                },delay)
             }
         }
-
         btn2.onclick = fangdou(function () {
-            console.log(123);
+            console.log('防抖');
         }, 1000)
-
-
-
-
-
-
 
 
     </script>
