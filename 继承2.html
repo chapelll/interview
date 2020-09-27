@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 组合继承
+        function A(name) {
+            this.name = name
+        }
+        A.prototype.sayHi = function () {
+            console.log('HI');
+        }
+
+        function B(name, color) {
+            A.call(this, name)
+            this.color = color
+        }
+        B.prototype = new A()
+        // B必须在这之后添加原型上的方法
+        B.prototype.play = function() {
+            console.log('play');
+        }
+
+        let b = new B('b','blue')
+        console.log(b);
+        console.log(b.name);
+        console.log(b.color);
+        b.sayHi()
+        b.play()
+
+        console.log('------------------------------');
+
+        // class继承
+        class People {
+            constructor(name,age) {
+                this.name = name
+                this.age = age
+            }
+            eat() {
+                console.log('吃饭');
+            }
+        }
+
+        let one = new People('jack',18)
+        console.log(one.name);
+        console.log(one.age);
+        one.eat()
+
+        class Kid extends People {
+            constructor (name,age,tall) {
+                super(name,age)
+                this.tall = tall
+            }
+            play() {
+                console.log("玩");
+            }
+        } 
+
+        let k = new Kid('john',10,'1米')
+        console.log(k.name);
+        console.log(k.age);
+        console.log(k.tall);
+        k.eat()
+        k.play()
+    </script>
+</body>
+
+</html>

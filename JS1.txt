@@ -75,6 +75,21 @@ Promise.race([promise1, promise2]).then(success, fail)
             }
         };
         request.send();
+
+axios({
+            url: '/getUsers',
+            method: 'get',
+            responseType: 'json', // 默认的
+            data: {
+                //'a': 1,
+                //'b': 2,
+            }
+        }).then(function (response) {
+            console.log(response);
+            console.log(response.data);
+        }).catch(function (error) {
+            console.log(error);
+            }）
    
 5.这段代码里的 this 是什么？ (背代码)
 
