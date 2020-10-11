@@ -20,7 +20,7 @@ beforeMount
      ↓               ↓
      ↓←←←←←←←←←   updated  (更新后做一些事情)
      ↓
-beforeDestroy
+beforeDestory
      ↓
   destoryed
   

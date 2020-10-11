@@ -6,7 +6,7 @@ margin(外边距)、border(边框)、padding(内边距)、content(内容)
 标准盒模型 的 width 是指 content内容的宽度
 IE盒模型 的 width 是指 content + padding + border 的宽度
  
-使用box-sizing来切换盒模型: 
+使用box-sizing来切换盒模型:  
 box-sizing: content-box 标注盒模型
 box-sizing: border-box IE盒模型
 一般都使用 IE 盒模型，它用起来比较简便好用 
@@ -130,10 +130,44 @@ BFC全称块级格式化上下文,在一个div里使用 overflow: hidden,
 (2) 一个元素浮动后面的元素会顶上来，使页面布局被改变 
 (3) 文本会围绕在浮动元素四周
     
+7.CSS画三角形
+答:
+#san {
+            width: 0;
+            height: 0;
+            border: 100px solid;
+            border-left-color: transparent;
+            border-top-color: transparent;
+            border-right-color: black;
+            border-bottom-color: transparent;
+            /* transform: rotate(30deg); */
+        }
     
-    
-    
-    
+8.animation动画(使用@keyframes)
+#move {
+            position: relative;
+            width: 50px;
+            height: 50px;
+            background: pink;
+            animation: move 1s linear infinite;
+        }
+
+        @keyframes move {
+            0% {
+                left: 0px;
+            }
+
+            50% {
+                left: 200px;
+            }
+
+            100% {
+                left: 400px;
+            }
+        }
+
+9.继承属性
+font-size font-style line-height
     
     
     

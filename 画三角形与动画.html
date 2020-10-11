@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        #father {
+            width: 300px;
+            height: 300px;
+            background: red;
+            /* margin-top: 100px; */
+            border: 1px solid ;
+        }
+
+        #son {
+            width: 150px;
+            height: 150px;
+            background: blue;
+            margin-top: 50px;
+        }
+
+        #san {
+            width: 0;
+            height: 0;
+            border: 100px solid;
+            border-left-color: transparent;
+            border-top-color: transparent;
+            border-right-color: black;
+            border-bottom-color: transparent;
+            /* transform: rotate(30deg); */
+        }
+
+        #move {
+            position: relative;
+            width: 50px;
+            height: 50px;
+            background: pink;
+            animation: move 1s linear infinite;
+        }
+
+        @keyframes move {
+            0% {
+                left: 0px;
+            }
+
+            50% {
+                left: 200px;
+            }
+
+            100% {
+                left: 400px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="father">
+        <div id="son"></div>
+    </div>
+
+    <div id="san"></div>
+    
+    <div id="move"></div>
+</body>
+</html>

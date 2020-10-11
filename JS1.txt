@@ -8,7 +8,7 @@
             return new Promise((resolve, reject) => {
                 // 进行状态
                 if (/*某种条件*/1) {
-                    resolve(数据)
+                    resolve(数据) 
                     //执行resolve函数(成功状态)
                 } else {
                     reject(报错)
@@ -99,14 +99,14 @@ axios({
 (2) obj.fn()
     this =》obj(谁调用它this就指向谁)
     
-(3) fn.call(xx)
+(3) fn.call(xx,参数1，参数2)
     this =》xx(call方法强制指定this)
    
 (4) fn.apply(xx,[])
     this =》xx(apply方法与call方法相似，只不过第二个参数是数组)
    
 (5) fn.bind(xx,参数1，参数2)
-    this =》xx(bind方法与call方法相似，只不过可以分批传参)
+    this =》xx(bind方法不会立即调用，而是返回一个新函数)
    
 (6) new Fn()
     this => 新对象(使用new创建对象时，this指向新创建的那个对象)

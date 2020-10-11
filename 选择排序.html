@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let array = [3, 8, 4, 7, 5, 9, 6, 1, 2]
+
+        // function arrSort(arr) {
+        //     let len = arr.length;
+        //     let index;
+        //     for (let i = 0; i < len; i++) {
+        //         index = i;
+        //         for (let j = i + 1; j < len; j++) {
+        //             if (arr[index] > arr[j]) {//寻找最小值
+        //                 index = j;//保存最小值的索引
+        //             }
+        //         }
+        //         if (index != i) {
+        //             let temp = arr[i];
+        //             arr[i] = arr[index];
+        //             arr[index] = temp;
+        //         }
+        //     }
+        //     return arr;
+        // }
+
+        function xuanze(array) {
+            let index
+            for (let i = 0; i < array.length; i++) {
+                index = i
+                for (let j = i + 1; j < array.length; j++) {
+                    if (array[j] < array[index]) {
+                        index = j
+                    }     
+                }
+                if (index !== i) {
+                    let temp = array[i]
+                    array[i] = array[index]
+                    array[index] = temp
+                }
+            }
+            return array
+        }
+
+
+        console.log(xuanze(array));
+
+
+    </script>
+</body>
+
+</html>

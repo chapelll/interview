@@ -1,36 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-
 <body>
     <script>
-        function kuaipai(array) {
-            if (array.length <= 1) {
-                return array
+        class A {
+            constructor (name) {
+                this.name = name
             }
-            let index = Math.floor(array.length / 2)
-            let n = array.splice(index, 1)
-            console.log(n);
-            let left = []
-            let right = []
-            for (let i = 0; i < array.length; i++) {
-                if (array[i] < n) {
-                    left.push(array[i])
-                } else {
-                    right.push(array[i])
-                }
+            sayHi() {
+                console.log('hi');
             }
-            return kuaipai(left).concat(n,kuaipai(right))
-        }
-        let array = [1,4,6,3,7,1,6,9,4,8,9,1]
-        console.log(kuaipai(array));
+        }        
 
+        class B extends A {
+            constructor (name,age) {
+                super(name)
+                this.age = age
+            }
+            run() {
+                console.log('跑');
+            }
+        }
+
+        let b = new B('小b',18)
+        console.log(b);
     </script>
 </body>
-
 </html>

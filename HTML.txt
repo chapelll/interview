@@ -45,7 +45,7 @@ audio : <audio src="someaudio.wav" autoplay loop controls>
         // audio用来在网页中放入一个音频
         // src是音频的地址
         // autoplay是自动播放
-        // loop是结束时创新播放
+        // loop是结束时重新播放
         // controls是向用户显示播放按钮之类的控件
 
 4.H5 是什么？
@@ -59,6 +59,7 @@ audio : <audio src="someaudio.wav" autoplay loop controls>
 
 Base64是基于64个可打印的字符来表示二进制的数据的一种方法。
 
+6.REM布局
 
 
 
