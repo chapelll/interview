@@ -97,7 +97,7 @@ Vue 不能检测到定义在data之外的对象属性的添加或删除，解决方法是
 6.VueRouter 你怎么用的？
 答:
 Vue Router 是 Vue.js 官方的路由管理器。使用它可以方便地构建
-单页面应用(根据URL地不同展示不同的组件)
+单页面应用(根据URL不同展示不同的组件)
 
 动态路由: 在路由配置时可以使用:id来占位。当进入到该路由所对应
 的组件时，可以使用this.$route.params来得到参数。
@@ -151,7 +151,7 @@ Vue-Router常用API:
                  进行渲染。
 (3) this.$router.push: 跳转一个路由，会留下历史记录
 (4) this.$router.replace: 替换一个路由，不会留下历史记录             
-(5) this.$route.params: 获取当前路由的信息，一般与:动态路由设置
+(5) this.$route.params: 获取占位符对应的信息，一般与:动态路由设置
                         相搭配使用            
 
 this.$router 指整个路由器 ； this.$route 指当前路由信息

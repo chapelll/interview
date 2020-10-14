@@ -72,7 +72,9 @@ newTarget来准备接收它。如果target是数组newTarget
             }
         }
 
-10.如何用正则实现 trim()？
+10.如何用正则实现 trim()？ js中使用正则表达式验证是否是数字？
+
+验证数字：/ ^[0-9]*$ / 
 
 答: trim()方法用来去除字符串的头尾空格。
 function trim(string) {

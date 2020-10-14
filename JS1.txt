@@ -173,8 +173,20 @@ Access-Control-Allow-Origin: http://wwwzczcz
 源A可以在请求头上这样写
 (访问控制允许源: 可以允许wwwzczcz源访问该网站数据)
 
+8.
+Object.prototype.__proto__ = null
+原型链: 当我使用一个对象A的方法时，如果A本身没有该方法，
+它会根据__proto__去找到它的构造函数的prototype(原型)上去
+找是否有该方法。如果构造函数的原型上也没有，那还会沿着构造
+函数的__proto__继续向前找，最终找的Object的原型上去。
+原型链的末端: Object.prototype.__proto__ = null
 
 
+obj.hasOwnProperty(prop):  判断prop是否是obj自身的属性或方法
+
+obj1.isPrototypeOf(obj2): 判断obj1是否是obj2的原型链上的对象
+
+a.instanceof(A): 判断a的原型链上是否有构造函数A的prototype 
 
 
    
